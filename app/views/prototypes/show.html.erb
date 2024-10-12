@@ -2,7 +2,7 @@
   <div class="inner">
     <div class="prototype__wrapper">
       <p class="prototype__hedding">
-        <%= @prototype.title %>
+        <%= @prototype.title%>
       </p>
       <%= link_to "by #{@prototype.user.name}", user_path(@prototype.user), class: :prototype__user %>
       <% if current_user == @prototype.user%>
@@ -11,6 +11,7 @@
           <%= link_to "削除する", prototype_path(@prototype), data: { turbo_method: :delete }, class: :prototype__btn %>
         </div>
       <% end %>
+      <%# // プロトタイプの投稿者とログインしているユーザーが同じであれば上記を表示する %>
       <div class="prototype__image">
         <%= image_tag @prototype.image %>
       </div>
@@ -30,7 +31,7 @@
       </div>
       <div class="prototype__comments">
         <% if user_signed_in? %>
-          <%= form_with model: [@prototype, @comment], local: true do |f|%>
+          <%= form_with model: [@prototype, @comment],local: true do |f|%>
             <div class="field">
               <%= f.label :content, "コメント" %><br />
               <%= f.text_field :content, id:"comment_content" %>
@@ -44,7 +45,7 @@
           <% @comments.each do |comment| %>
             <li class="comments_list">
               <%= comment.content%>
-              <%= link_to "（#{comment.user.name}）", user_path(comment.user), class: :comment_user %>
+              <%= link_to "(#{comment.user.name})", user_path(comment.user), class: :comment_user %>
             </li>
           <% end %>
         </ul>
